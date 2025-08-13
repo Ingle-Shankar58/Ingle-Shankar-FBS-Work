@@ -26,8 +26,10 @@ void bank(double balance,double amount,char choice)
 		if(amount>0) {
 			balance=balance+amount;
 			printf("Congratulations your Ac is credited by:%lf and current balance is:%lf",amount,balance);
+			return ;
 		} else {
 			printf("invalid amount please fill the amount is grager than zero (0)");
+			return ;
 		}
 
 	} else {
@@ -38,17 +40,21 @@ void bank(double balance,double amount,char choice)
 			scanf("%lf",&amount);
 			if(balance <=3000) {
 				printf("Sorry dear customer your AC balance is not sufficient for withdraw money  banance is less than 3000");
+				return ;
 			} else {
 				if(amount>balance) {
 					printf("insufficient fund");
+					return ;
 				} else {
 					if(amount<=0) {
 						printf("invalid amount");
+						return ;
 					}
 				}
 			}
 			balance=balance-amount;
 			printf("dear customer %lf is withdraw from your AC and current balance is :%lf",amount,balance);
+			return ;
 		} else {
 			printf("invalid choice");
 		}
@@ -58,3 +64,4 @@ void bank(double balance,double amount,char choice)
 
 
 }
+
