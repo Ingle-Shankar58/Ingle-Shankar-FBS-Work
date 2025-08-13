@@ -38,15 +38,12 @@ void bank(double balance,double amount,char choice)
 			scanf("%lf",&amount);
 			if(balance <=3000) {
 				printf("Sorry dear customer your AC balance is not sufficient for withdraw money  banance is less than 3000");
-				return;
 			} else {
 				if(amount>balance) {
 					printf("insufficient fund");
-					return ;
 				} else {
 					if(amount<=0) {
 						printf("invalid amount");
-						return;
 					}
 				}
 			}
@@ -57,6 +54,7 @@ void bank(double balance,double amount,char choice)
 		}
 
 	}
+
 
 
 }
