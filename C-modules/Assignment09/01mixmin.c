@@ -1,6 +1,6 @@
 //Find minimum and maximum number in array.
 #include<stdio.h>
-void maxandmin(int arr[]);
+void maxandmin(int []);
 void main()
 {
 	int arr[5];
@@ -26,4 +26,5 @@ void maxandmin(int arr[])
 		}
 	}
 	printf("minimum number is :%d",min);
+
 }
