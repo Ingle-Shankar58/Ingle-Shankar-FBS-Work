@@ -1,0 +1,419 @@
+1) Create the table Member, Books and Issue without any constraints as
+mentioned in the schema description above. 
+--> 
+CREATE TABLE Member(Member_Id INT,
+    -> Member_Name VARCHAR(30),
+    -> Member_address VARCHAR(50),
+    -> Acc_Open_Date DATE,
+    -> Membership_type VARCHAR(20),
+    -> Fees_paid INT,
+    -> Max_Books_Allowed INT,
+    -> Penalty_Amount DECIMAL(7,2));
+
+2) Books- It contains information about the books belongs to the library
+-->  CREATE TABLE Books
+    -> (Book_No INT,
+    -> Book_Name VARCHAR(30),
+    -> Author_name VARCHAR(30),
+    -> Cost DECIMAL(7,2),
+    -> Category CHAR(10));
+
+3) Issue – It contains the information about issue of the books
+-->  CREATE TABLE ISSUE
+    -> (Lib_Issue_Id INT,
+    -> Book_No INT,
+    -> Member_Id INT,
+    -> Issue_Date DATE,
+    -> Return_date DATE);
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+2) View the structure of the tables.
+-->  DESC MEMBER;
++-------------------+--------------+------+-----+---------+-------+
+| Field             | Type         | Null | Key | Default | Extra |
++-------------------+--------------+------+-----+---------+-------+
+| Member_Id         | int          | YES  |     | NULL    |       |
+| Member_Name       | varchar(30)  | YES  |     | NULL    |       |
+| Member_address    | varchar(50)  | YES  |     | NULL    |       |
+| Acc_Open_Date     | date         | YES  |     | NULL    |       |
+| Membership_type   | varchar(20)  | YES  |     | NULL    |       |
+| Fees_paid         | int          | YES  |     | NULL    |       |
+| Max_Books_Allowed | int          | YES  |     | NULL    |       |
+| Penalty_Amount    | decimal(7,2) | YES  |     | NULL    |       |
++-------------------+--------------+------+-----+---------+-------+
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+3) Drop the Member table
+-->  DROP TABLE MEMBER;
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+4) Create the table Member again as per the schema description with the
+following constraints.
+a. Member_Id – Primary Key
+b. Membership_type - ‘Lifetime’,’ Annual’, ‘Half Yearly’,’ Quarterly’
+--> 
+CREATE TABLE Member
+    -> (Member_Id INT PRIMARY KEY,
+    -> Member_Name VARCHAR(30),
+    -> Member_address VARCHAR(50),
+    -> Acc_Open_Date DATE,
+    -> Membership_type ENUM('Lifetime','Annual','Half Yearly','Quarterly'),
+    -> Fees_paid INT,
+    -> Max_Books_Allowed INT,
+    -> Penalty_Amount DECIMAL(7,2));
+
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+5) Modify the table Member increase the width of the member name to 30
+characters.
+--> 
+ ALTER TABLE MEMBER
+    -> MODIFY  Member_Name VARCHAR(60);
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+6) Add a column named as Reference of Char(30) to Issue table.
+-->  ALTER TABLE ISSUE
+    -> ADD COLUMN Reference CHAR(30);
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+7) Delete/Drop the column Reference from Issue.
+--> ALTER TABLE ISSUE 
+    -> DROP COLUMN Reference;
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+8) Rename the table Issue to Lib_Issue.
+--> RENAME TABLE ISSUE TO Lib_Issue;
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+9) 9) Insert following data in table Member
+--> INSERT INTO MEMBER
+    -> VALUES(1,'RICHA SHARMA','PUNE',"2005/12/10",'LIFETIME',25000,5,50),
+    -> (2,'GARIMA SEN','PUNE',CURDATE(),'ANNUAL',1000,3,NULL);
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+10) Insert at least 5 records with suitable data.
+-->  INSERT INTO MEMBER
+    -> VALUES(3,'SHRIKANT WANKHADE','NANDED',"2004/09/10",'LIFETIME',26000,2,50),
+    -> (4,'TEJAS KADAM','PUNE',CURDATE(),'ANNUAL',1000,3,60),
+    -> (5,'YOGESH KADAM','PUNE'," 2004/09/09",'HALF YEARLY',9000,4,70),
+    -> (6,'SHUBHAM AKYAMWAR','NANDED',CURDATE(),'QUARTERLY',8000,4,70),
+    -> (7,'AMOL AVLOD','NANDED',CURDATE(),'QUARTERLY',8000,4,70);
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+11) Modify the column Member_name. Decrease the width of the member
+name to 20 characters. (If it does not allow state the reason for that)
+--> ALTER TABLE MEMBER MODIFY
+    -> COLUMN MEMBER_NAME VARCHAR(20);
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+12) Try to insert a record with Max_Books_Allowed = 110, Observe the
+error that comes.
+--> INSERT INTO MEMBER
+    -> VALUES(8,'SHANTANU KHISE','PUNE',CURDATE(),'LIFETIME',36000,110,90.09);
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+13) Generate another table named Member101 using a Create command
+along with a simple SQL query on member table.
+--> CREATE TABLE Member101 AS SELECT * FROM MEMBER;
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+14) Add the constraints on columns max_books_allowed and penalty_amt
+as follows
+a. max_books_allowed < 100
+b. penalty_amt maximum 1000
+Also give names to the constraints.
+
+A) max_books_allowed < 100
+-->  ALTER TABLE MEMBER
+    -> ADD CONSTRAINT SHANKY
+    -> CHECK (MAX_BOOKS_ALLOWED<100);
+B) penalty_amt maximum 1000
+--> ALTER TABLE MEMBER
+    -> ADD CONSTRAINT INGLE
+    -> CHECK( Penalty_Amount<1000);
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+15) Drop the table books.
+-->  DROP TABLE BOOKS;
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+16) Create table Books again as per the schema description with the
+following constraints.
+a. Book_No – Primary Key
+b. Book_Name – Not Null
+c. Category – System, Fiction, Database, RDBMS, Others.
+
+-->  CREATE TABLE BOOKS
+    -> (Book_No INT PRIMARY KEY,
+    -> Book_Name VARCHAR(30) NOT NULL,
+    -> Author_name VARCHAR(30),
+    -> Cost DECIMAL(7,2),
+    -> Category ENUM('System','Fiction','Database','RDBMS','Others'));
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+17) Insert data in Book table as follows:
+--> INSERT INTO BOOKS
+    -> VALUES(101,'LET US C','DENIS RITCHIE',450,'SYSTEM'),
+    -> (102,'ORACEL-COMPUTER REF','LONI',550,'DATABASE'),
+    -> (103,'MASTERING SQL','LONI',250,'DATABASE'),
+    -> (104,'PL SQL-REF','SCOTT URMAN',750,'DATABASE');
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+18) Insert more records in Book table.
+--> INSERT INTO BOOKS
+    -> VALUES(105,'CHHAVA','SHANKAR INGLE',750,'Others'),
+    -> (106,'PATIL IS BRAND','SHRIKANT',850,'Others'),
+    -> (107,'NANDEDKAR','AMOL',650,'Others');
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+19) View the data in the tables using simple SQL query..
+--> SELECT * FROM BOOKS;
++---------+---------------------+---------------+--------+----------+
+| Book_No | Book_Name           | Author_name   | Cost   | Category |
++---------+---------------------+---------------+--------+----------+
+|     101 | LET US C            | DENIS RITCHIE | 450.00 | System   |
+|     102 | ORACEL-COMPUTER REF | LONI          | 550.00 | Database |
+|     103 | MASTERING SQL       | LONI          | 250.00 | Database |
+|     104 | PL SQL-REF          | SCOTT URMAN   | 750.00 | Database |
+|     105 | CHHAVA              | SHANKAR INGLE | 750.00 | Others   |
+|     106 | PATIL IS BRAND      | SHRIKANT      | 850.00 | Others   |
+|     107 | NANDEDKAR           | AMOL          | 650.00 | Others   |
++---------+---------------------+---------------+--------+----------+
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+20) Insert into Book following data.
+105, National Geographic, Adis Scott, 1000, Science
+
+--> INSERT INTO BOOKS
+    -> VALUES(105,'National Geographic','Adis Scott',1000,'SCIENCE');
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+21) Rename the table Lib_Issue to Issue.
+-->  RENAME TABLE LIB_ISSUE TO ISSUE;
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+22) Drop table Issue.
+-->  DROP TABLE ISSUE;
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+23) As per the given structure Create table Issue again with following
+constraints.
+
+ Lib_Issue_Id-Primary key
+ Book_No- foreign key
+ Member_id - foreign key
+ Issue_date
+ Return_date
+--> 
+ CREATE TABLE ISSUE
+    -> (Lib_Issue_Id INT PRIMARY KEY ,
+    -> Book_No INT,
+    -> Member_id INT,
+    -> Issue_date DATE,
+    -> Return_date DATE,
+    -> CONSTRAINT SHANKY FOREIGN KEY(BOOK_NO) REFERENCES BOOKS(BOOK_NO),
+    -> CONSTRAINT INGLE FOREIGN KEY(MEMBER_ID) REFERENCES MEMBER(MEMBER_ID));
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+24) Insert following data into Issue table.
+--> INSERT INTO ISSUE
+    -> (Lib_Issue_Id,Book_No,Member_id, Issue_date)
+    -> VALUES(7001,101,1,"2010/12/06"),
+    -> (7002,102,2,"2025/12/06"),
+    -> (7003,104,1,"2015/1/06"),
+    -> (7004,101,1,"2004/7/06"),
+    -> (7005,104,2,"2015/11/06"),
+    -> (7006,101,3,"2018/02/06");
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+25) Remove the constraints on issue table
+--> ALTER TABLE ISSUE
+    -> DROP PRIMARY KEY ,
+    -> DROP FOREIGN KEY SHANKY ,
+    -> DROP FOREIGN KEY INGLE ;
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+26) Insert a record in Issue. The member_id Shoult not exit in member table  
+--> 
+INSERT INTO ISSUE
+    -> (Lib_Issue_Id,Book_No,Member_id,Issue_date)
+    -> VALUES(7007,115,15,CURDATE());
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+27) Now enable the constraint of issue table. Observe the error 
+--> ALTER TABLE Issue
+    -> ADD CONSTRAINT shanky FOREIGN KEY (Member_id) REFERENCES Member(Member_Id),
+    -> ADD CONSTRAINT ingle FOREIGN KEY (Book_No) REFERENCES Books(Book_no);
+
+ERROR 1452 (23000): Cannot add or update a child row: a foreign key constraint fails (`mysql_assignment2`.`#sql-1ba8_8`, CONSTRAINT `shanky` FOREIGN KEY (`Member_id`) REFERENCES `member` (`Member_Id`)) 
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+28) Delete the record insertes at Q27) and enable the constraints...
+--> DELETE FROM ISSUE WHERE  Lib_Issue_Id = 7007;
+
+
+-->  ALTER TABLE Issue
+    ->	ADD CONSTRAINT shanky FOREIGN KEY (Member_id) REFERENCES Member(Member_Id),
+    ->  ADD CONSTRAINT ingle FOREIGN KEY (Book_No) REFERENCES Books(Book_no);
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+29) Try to delete the record of member id 1 from member table and observe the error..
+--> DELETE FROM MEMBER WHERE MEMBER_ID = 1;
+
+ERROR 1451 (23000): Cannot delete or update a parent row: a foreign key constraint fails (`mysql_assignment2`.`issue`, CONSTRAINT `shanky` FOREIGN KEY (`Member_id`) REFERENCES `member` (`Member_Id`))
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+30) View the data and structure of all the three tables member,issue,book,
+--> 1) MEMBER TABLE 
+--> DESC MEMBER;
++-------------------+-----------------------------------------------------+------+-----+---------+-------+
+| Field             | Type                                                | Null | Key | Default | Extra |
++-------------------+-----------------------------------------------------+------+-----+---------+-------+
+| Member_Id         | int                                                 | NO   | PRI | NULL    |       |
+| MEMBER_NAME       | varchar(20)                                         | YES  |     | NULL    |       |
+| Member_address    | varchar(50)                                         | YES  |     | NULL    |       |
+| Acc_Open_Date     | date                                                | YES  |     | NULL    |       |
+| Membership_type   | enum('Lifetime','Annual','Half Yearly','Quarterly') | YES  |     | NULL    |       |
+| Fees_paid         | int                                                 | YES  |     | NULL    |       |
+| Max_Books_Allowed | int                                                 | YES  |     | NULL    |       |
+| Penalty_Amount    | decimal(7,2)                                        | YES  |     | NULL    |       |
++-------------------+-----------------------------------------------------+------+-----+---------+-------+
+
+--> SELECT * FROM MEMBER;
++-----------+-------------------+----------------+---------------+-----------------+-----------+-------------------+----------------+
+| Member_Id | MEMBER_NAME       | Member_address | Acc_Open_Date | Membership_type | Fees_paid | Max_Books_Allowed | Penalty_Amount |
++-----------+-------------------+----------------+---------------+-----------------+-----------+-------------------+----------------+
+|         1 | RICHA SHARMA      | PUNE           | 2005-12-10    | Lifetime        |     25000 |                 5 |          50.00 |
+|         2 | GARIMA SEN        | PUNE           | 2025-10-01    | Annual          |      1000 |                 3 |           NULL |
+|         3 | SHRIKANT WANKHADE | NANDED         | 2004-09-10    | Lifetime        |     26000 |                 2 |          50.00 |
+|         4 | TEJAS KADAM       | PUNE           | 2025-10-01    | Annual          |      1000 |                 3 |          60.00 |
+|         5 | YOGESH KADAM      | PUNE           | 2004-09-09    | Half Yearly     |      9000 |                 4 |          70.00 |
+|         6 | SHUBHAM AKYAMWAR  | NANDED         | 2025-10-01    | Quarterly       |      8000 |                 4 |          70.00 |
+|         7 | AMOL AVLOD        | NANDED         | 2025-10-01    | Quarterly       |      8000 |                 4 |          70.00 |
+|         8 | SHANTANU KHISE    | PUNE           | 2025-10-01    | Lifetime        |     36000 |                98 |          90.09 |
++-----------+-------------------+----------------+---------------+-----------------+-----------+-------------------+----------------+
+
+
+2) ISSUE TABLE 
+--> DESC ISSUE;
++--------------+------+------+-----+---------+-------+
+| Field        | Type | Null | Key | Default | Extra |
++--------------+------+------+-----+---------+-------+
+| Lib_Issue_Id | int  | NO   |     | NULL    |       |
+| Book_No      | int  | YES  | MUL | NULL    |       |
+| Member_id    | int  | YES  | MUL | NULL    |       |
+| Issue_date   | date | YES  |     | NULL    |       |
+| Return_date  | date | YES  |     | NULL    |       |
++--------------+------+------+-----+---------+-------+
+
+--> SELECT * FROM ISSUE;
++--------------+---------+-----------+------------+-------------+
+| Lib_Issue_Id | Book_No | Member_id | Issue_date | Return_date |
++--------------+---------+-----------+------------+-------------+
+|         7001 |     101 |         1 | 2010-12-06 | NULL        |
+|         7002 |     102 |         2 | 2025-12-06 | NULL        |
+|         7003 |     104 |         1 | 2015-01-06 | NULL        |
+|         7004 |     101 |         1 | 2004-07-06 | NULL        |
+|         7005 |     104 |         2 | 2015-11-06 | NULL        |
+|         7006 |     101 |         3 | 2018-02-06 | NULL        |
++--------------+---------+-----------+------------+-------------+
+
+3) BOOK TABLE 
+-->  DESC BOOKS;
++-------------+----------------------------------------------------------------+------+-----+---------+-------+
+| Field       | Type                                                           | Null | Key | Default | Extra |
++-------------+----------------------------------------------------------------+------+-----+---------+-------+
+| Book_No     | int                                                            | NO   | PRI | NULL    |       |
+| Book_Name   | varchar(30)                                                    | NO   |     | NULL    |       |
+| Author_name | varchar(30)                                                    | YES  |     | NULL    |       |
+| Cost        | decimal(7,2)                                                   | YES  |     | NULL    |       |
+| CATEGORY    | enum('System','Fiction','Database','RDBMS','Science','Others') | YES  |     | NULL    |       |
++-------------+----------------------------------------------------------------+------+-----+---------+-------+
+
+--> SELECT * FROM BOOKS;
++---------+---------------------+---------------+---------+----------+
+| Book_No | Book_Name           | Author_name   | Cost    | CATEGORY |
++---------+---------------------+---------------+---------+----------+
+|     101 | LET US C            | DENIS RITCHIE |  450.00 | System   |
+|     102 | ORACEL-COMPUTER REF | LONI          |  550.00 | Database |
+|     103 | MASTERING SQL       | LONI          |  250.00 | Database |
+|     104 | PL SQL-REF          | SCOTT URMAN   |  750.00 | Database |
+|     105 | National Geographic | Adis Scott    | 1000.00 | Science  |
+|     106 | PATIL IS BRAND      | SHRIKANT      |  850.00 | Others   |
+|     107 | NANDEDKAR           | AMOL          |  650.00 | Others   |
++---------+---------------------+---------------+---------+----------+
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+31) MODIFY THE RETURN_DATE OF 7004,7005 TO 15 DAYS AFTER THE ISSUE_DATE.
+--> UPDATE ISSUE
+    -> SET Return_date = DATE_ADD(ISSUE_DATE,INTERVAL 15 DAY)
+    -> WHERE Lib_Issue_Id IN (7004,7005);
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+32) REMOVE ALL THE RECORDS FROM ISSUE TABLE WHERE MEMBER_ID IS 1 AND ISSUE DATE IN BEFORE 2010/DEC/06..
+
+--> DELETE FROM ISSUE
+    -> WHERE MEMBER_ID = 1 AND Issue_date < '2010/12/06';
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
