@@ -1,0 +1,192 @@
+1. Write a SQL statement to insert a record as follows:
+Employees :
+
+1) CREATE TABLE EMPLOYEES
+--> CREATE TABLE Employees
+    -> (EMPLOYEE_ID INT AUTO_INCREMENT PRIMARY KEY,
+    -> FIRST_NAME VARCHAR(50),
+    -> LAST_NAME VARCHAR(50),
+    -> EMAIL VARCHAR(50),
+    -> PHONE_NUMBER VARCHAR(100),
+    -> HIRE_DATE DATE,
+    -> JOB_ID VARCHAR(50),
+    -> SALARY DECIMAL(10,2),
+    -> COMMISSION_PCT DECIMAL(7,2),
+    -> MANAGER_ID INT,
+    -> DEPARTMENT_ID INT);
+Query OK, 0 rows affected (0.02 sec)
+
+2) INSERT DATA INTO EMPLOYEES
+-->  INSERT INTO EMPLOYEES VALUES
+    -> (100, 'Steven', 'King', 'SKING', '515.123.4567', '1987-06-17', 'AD_PRES', 24000.00, 0.00, 200, 10),
+    ->      (101, 'Neena', 'Kochhar', 'NKOCHHAR', '515.123.4568', '1987-06-18', 'AD_VP', 17000.00, 0.00, 200, 10),
+    ->     (102, 'Lex', 'De Haan', 'LDEHAAN', '515.123.4569', '1987-06-19', 'AD_VP', 17000.00, 0.00, 200, 10),
+    ->     (103, 'Alexander', 'Hunold', 'AHUNOLD', '590.423.4567', '1987-06-20', 'IT_PROG', 9000.00, 0.00, 103, 60),
+    ->      (104, 'Bruce', 'Ernst', 'BERNST', '590.423.4568', '1987-06-21', 'IT_PROG', 6000.00, 0.00, 103, 60),
+    ->      (105, 'David', 'Austin', 'DAUSTIN', '590.423.4569', '1987-06-22', 'IT_PROG', 4800.00, 0.00, 103, 60),
+    ->      (106, 'Valli', 'Pataballa', 'VPATABAL', '590.423.4560', '1987-06-23', 'IT_PROG', 4800.00, 0.00, 103, 60),
+    ->     (107, 'Diana', 'Lorentz', 'DLORENTZ', '590.423.5567', '1987-06-24', 'IT_PROG', 4200.00, 0.00, 114, 30),
+    ->      (108, 'Nancy', 'Greenberg', 'NGREENBE', '515.124.4569', '1987-06-25', 'SA_MAN', 12000.00, 0.00, 145, 80),
+    ->      (109, 'Daniel', 'Faviet', 'DFAVIET', '515.124.4169', '1987-06-26', 'SA_MAN', 9000.00, 0.00, 145, 80);
+
+
+
+2) CREATE TABLE DEPARTMENT
+CREATE TABLE Department
+    -> ( DEPARTMENT_ID INT,
+    -> DEPARTMENT_NAME VARCHAR(50),
+    -> MANAGER_ID INT,
+    -> LOCATION_ID INT);
+Query OK, 0 rows affected (0.02 sec)
+
+3) INSERT DATA 
+--> 
+INSERT INTO department values(10,'Administration',200,1700),
+    ->     (20,'Marketing',201,1800),
+    ->     (30,'Purchasing',114,1700),
+    ->     (40,'Human Resources',203,2400),
+    ->     (50,'Shiping',121,1500),
+    ->     (60,'IT',103,1400),
+    ->     (70,'Public Realtions',204,2700),
+    ->     (80,'Sales',145,2500);
+
+-->  TABLE DEPARTMENT;
++---------------+------------------+------------+-------------+
+| DEPARTMENT_ID | DEPARTMENT_NAME  | MANAGER_ID | LOCATION_ID |
++---------------+------------------+------------+-------------+
+|            10 | Administration   |        200 |        1700 |
+|            20 | Marketing        |        201 |        1800 |
+|            30 | Purchasing       |        114 |        1700 |
+|            40 | Human Resources  |        203 |        2400 |
+|            50 | Shiping          |        121 |        1500 |
+|            60 | IT               |        103 |        1400 |
+|            70 | Public Realtions |        204 |        2700 |
+|            80 | Sales            |        145 |        2500 |
++---------------+------------------+------------+-------------+
+
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Q.2) Write a SQL statement to insert 3 rows by a single insert statement
+
+-->  INSERT INTO Employees (employee_id, first_name, last_name, email, phone_number, hire_date, job_id, salary, commission_pct, manager_id, department_id)
+    ->      VALUES
+    ->      (110, 'John', 'Doe', 'JDOE', '515.555.1111', '1987-06-27', 'IT_PROG', 5000.00, 0.00, 103, 60),
+    ->      (111, 'Mary', 'Smith', 'MSMITH', '515.555.2222', '1987-06-28', 'SA_REP', 6000.00, 0.00, 145, 80),
+    ->      (112, 'Robert', 'Brown', 'RBROWN', '515.555.3333', '1987-06-29', 'HR_REP', 4500.00, 0.00, 101, 40);
+
+
+mysql> TABLE EMPLOYEES;
++-------------+------------+-----------+----------+--------------+------------+---------+----------+----------------+------------+---------------+
+| EMPLOYEE_ID | FIRST_NAME | LAST_NAME | EMAIL    | PHONE_NUMBER | HIRE_DATE  | JOB_ID  | SALARY   | COMMISSION_PCT | MANAGER_ID | DEPARTMENT_ID |
++-------------+------------+-----------+----------+--------------+------------+---------+----------+----------------+------------+---------------+
+|         100 | Steven     | King      | SKING    | 515.123.4567 | 1987-06-17 | AD_PRES | 24000.00 |           0.00 |        200 |            10 |
+|         101 | Neena      | Kochhar   | NKOCHHAR | 515.123.4568 | 1987-06-18 | AD_VP   | 17000.00 |           0.00 |        200 |            10 |
+|         102 | Lex        | De Haan   | LDEHAAN  | 515.123.4569 | 1987-06-19 | AD_VP   | 17000.00 |           0.00 |        200 |            10 |
+|         103 | Alexander  | Hunold    | AHUNOLD  | 590.423.4567 | 1987-06-20 | IT_PROG |  9000.00 |           0.00 |        103 |            60 |
+|         104 | Bruce      | Ernst     | BERNST   | 590.423.4568 | 1987-06-21 | IT_PROG |  6000.00 |           0.00 |        103 |            60 |
+|         105 | David      | Austin    | DAUSTIN  | 590.423.4569 | 1987-06-22 | IT_PROG |  4800.00 |           0.00 |        103 |            60 |
+|         106 | Valli      | Pataballa | VPATABAL | 590.423.4560 | 1987-06-23 | IT_PROG |  4800.00 |           0.00 |        103 |            60 |
+|         107 | Diana      | Lorentz   | DLORENTZ | 590.423.5567 | 1987-06-24 | IT_PROG |  4200.00 |           0.00 |        114 |            30 |
+|         108 | Nancy      | Greenberg | NGREENBE | 515.124.4569 | 1987-06-25 | SA_MAN  | 12000.00 |           0.00 |        145 |            80 |
+|         109 | Daniel     | Faviet    | DFAVIET  | 515.124.4169 | 1987-06-26 | SA_MAN  |  9000.00 |           0.00 |        145 |            80 |
+|         110 | John       | Doe       | JDOE     | 515.555.1111 | 1987-06-27 | IT_PROG |  5000.00 |           0.00 |        103 |            60 |
+|         111 | Mary       | Smith     | MSMITH   | 515.555.2222 | 1987-06-28 | SA_REP  |  6000.00 |           0.00 |        145 |            80 |
+|         112 | Robert     | Brown     | RBROWN   | 515.555.3333 | 1987-06-29 | HR_REP  |  4500.00 |           0.00 |        101 |            40 |
++-------------+------------+-----------+----------+--------------+------------+---------+----------+----------------+------------+---------------+
+
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Q.3) Write a SQL statement to insert one row in jobs table to ensure that no duplicate
+value will be entered in the job_id column.
+--> 1) CREATE TABLE 
+-->  CREATE TABLE JOBS
+    -> (JOB_ID VARCHAR(50) PRIMARY KEY,
+    -> JOB_TITLE VARCHAR(100),
+    -> MIN_SALARY DECIMAL(10,2),
+    -> MAX_SALARY DECIMAL(10,2));
+
+2) INSERT DATA 
+--> INSERT INTO JOBS (JOB_ID, JOB_TITLE, MIN_SALARY, MAX_SALARY) VALUES
+    -> ('AD_PRES', 'President', 20000, 40000),
+    -> ('AD_VP', 'Administration Vice President', 15000, 30000),
+    -> ('AD_ASST', 'Administration Assistant', 3000, 6000),
+    -> ('FI_MGR', 'Finance Manager', 8200, 16000),
+    -> ('FI_ACCOUNT', 'Accountant', 4200, 9000),
+    -> ('AC_MGR', 'Accounting Manager', 8200, 16000),
+    -> ('AC_ACCOUNT', 'Public Accountant', 4200, 9000),
+    -> ('SA_MAN', 'Sales Manager', 10000, 20000);
+
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Q.3) Write SQL statement to increment salary of each emp by 10%.
+-->  UPDATE EMPLOYEES
+    -> SET SALARY = SALARY*1.10;
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Q.5) Write a SQL statement to change the email column of employees table with 'not
+available' for those employees whose department_id is 80 and gets a
+commission is less than .20%
+
+      update employees
+    -> set email='Not Awailable'
+    -> where department_id=80
+    -> AND commission_pct < 0.002;
+       ERROR 1062 (23000): Duplicate entry 'Not Awailable' for key 'employees.email'
+
+
+     Explanation:
+     The email column is unique.
+
+     You tried to set the same value ‘Not Awailable’ for multiple rows.
+
+     MySQL does not allow duplicate values in a unique column.
+
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Q.6) Write a SQL statement to change the email column of employees table with 'not
+        available' for those employees who belongs to the 'Purchasing' department.
+--> UPDATE Employees
+    -> SET EMAIL = 'not available'
+    -> WHERE DEPARTMENT_ID = (
+    -> SELECT DEPARTMENT_ID
+    -> FROM Department
+    -> WHERE DEPARTMENT_NAME = 'Purchasing'
+    -> );
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Q.7) Write a SQL statement to change the email and commission_pct column of
+     employees table with 'not available' and 0.10 for all employees.
+--> UPDATE Employees
+    -> SET EMAIL = 'not available',
+    -> COMMISSION_PCT = 0.10;
+
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
